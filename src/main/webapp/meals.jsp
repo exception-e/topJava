@@ -25,8 +25,8 @@
             <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" /></td>
         <td>${meal.description}</td>
         <td>${meal.calories}</td>
-        <td><a href="meals?action=edit">Add Meal</a></td>
-        <td><a href="meals?action=delete">Delete Meal</a></td>
+        <td><a href="meals?action=edit">Edit Meal</a></td>
+        <td><a href="meals?action=delete&id=${meal.id}">Delete Meal</a></td>
     </tr>
         </c:forEach>
 </table>

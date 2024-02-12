@@ -68,7 +68,22 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             Meal meal = new Meal();
 
-            meal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+
+//        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//            request.setCharacterEncoding("UTF-8");
+//            String id = request.getParameter("id");
+//
+//            Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
+//                    LocalDateTime.parse(request.getParameter("dateTime")),
+//                    request.getParameter("description"),
+//                    Integer.parseInt(request.getParameter("calories")));
+//
+//            log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
+//            repository.save(meal);
+//            response.sendRedirect("meals");
+//        }
+
+            meal.setDateTime(LocalDateTime.parse(request.getParameter("dateTime")));
             meal.setCalories(Integer.parseInt(request.getParameter("calories")));
             meal.setDescription(request.getParameter("description"));
 
