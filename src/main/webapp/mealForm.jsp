@@ -14,32 +14,29 @@
     <title>Add meal</title>
 </head>
 <body>
+
+<h3><a href="index.html">Home</a></h3>
+<hr>
+<h2>${param.action == 'insert' ? 'Create meal' : 'Edit meal'}</h2>
+<jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo" scope="request"/>
+
 <form method="post" action="meals" name="mealForm">
-    Date Time: <label>
-    <input type="text" name="dateTime"
-    value="<jsp:useBean id="meal" scope="request" type="ru.javawebinar.topjava.model.MealTo"/>
-    <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${meal.dateTime}"/>" />
-</label>
+    Date Time:
+    <input type="datetime-local" value="${meal.dateTime}" name="dateTime" required/>
     <br />
-    ID : <label>
-    <input type="text" name="id"
-    value="<c:out value="${meal.id}" />" />
-</label>
+    ID :
+    <input type="text" name="id" value="${meal.id}" />
     <br />
     Description :
-    <label>
     <input
-    type="text" name="description"
-    value="<c:out value="${meal.description}" />" />
-    </label>
+    type="text" name="description" value="${meal.description}" />
     <br />
-    Calories : <label>
+    Calories :
     <input
-    type="text" name="calories"
-    value="<c:out value="${meal.calories}" />" />
-</label>
+    type="text" name="calories" value="${meal.calories}" />
     <br />
-    <input type="submit" value="Submit"/>
+    <button type="submit">Save</button>
+    <button onclick="window.history.back()" type="button">Cancel</button>
     </form>
 </body>
 </html>
