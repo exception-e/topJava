@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
@@ -22,13 +23,18 @@ public class MealsUtil {
     ));
 
     public static int caloriesPerDay = 2000;
-
     public static List<MealTo> mealToList = MealsUtil.filteredByStreams(MealsUtil.meals, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
+    public static Map<Integer, MealTo> mealToMap = new HashMap<>();
 
-    public static Map<Integer, MealTo> mealMap = new HashMap<Integer, MealTo>();
+    public static Map<Integer, Meal> mealMap = new HashMap<>();
 
-    public static Map<Integer, MealTo> makeMap(){
-        mealToList.forEach(meal -> mealMap.put(meal.getId(), meal));
+    public static Map<Integer, MealTo> makeMapMealTo(){
+        mealToList.forEach(meal -> mealToMap.put(meal.getId(), meal));
+        return mealToMap;
+    }
+
+    public static Map<Integer, Meal> makeMapMeal(){
+        meals.forEach(meal -> mealMap.put(meal.getId(), meal));
         return mealMap;
     }
 

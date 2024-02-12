@@ -7,26 +7,33 @@ import ru.javawebinar.topjava.util.MealsUtil;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class MealDao {
 
+    public MealDao() {
+        MealsUtil.makeMapMeal();
+        MealsUtil.makeMapMealTo();
+    }
+
     public void addMeal(Meal meal) {
-        MealsUtil.meals.add(meal);
+        MealsUtil.mealMap.put(meal.getId(), meal);
     }
 
     public void deleteMeal(int mealId) {
-        MealsUtil.meals.remove(MealsUtil.meals.get(mealId));
+        MealsUtil.mealMap.remove(mealId);
     }
 
     public void updateMeal(Meal meal) {
-        MealsUtil.meals.add(meal);
+        MealsUtil.mealMap.put(meal.getId(), meal);
     }
 
     public List<MealTo> getAllMeals() {
-        return new ArrayList<>(MealsUtil.filteredByStreams(MealsUtil.meals, LocalTime.MIN, LocalTime.MAX, MealsUtil.caloriesPerDay));
+        return new ArrayList<>(MealsUtil.filteredByStreams(MealsUtil.mealMap.values().stream().collect(Collectors.toList()), LocalTime.MIN, LocalTime.MAX, MealsUtil.caloriesPerDay));
     }
 
     public MealTo getMealById(int mealId) {
-        return MealsUtil.makeMap().get(mealId);
+        return MealsUtil.makeMapMealTo().get(mealId);
     }
 }
