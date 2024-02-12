@@ -9,7 +9,7 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Meals</h2>
-
+<a href="meals?action=insert">Add Meal</a>
 <table border="1">
     <tr>
         <th>Date</th>
@@ -25,8 +25,8 @@
             <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" /></td>
         <td>${meal.description}</td>
         <td>${meal.calories}</td>
-        <td></td>
-        <td></td>
+        <td><a href="meals?action=edit">Add Meal</a></td>
+        <td><a href="meals?action=delete">Delete Meal</a></td>
     </tr>
         </c:forEach>
 </table>
