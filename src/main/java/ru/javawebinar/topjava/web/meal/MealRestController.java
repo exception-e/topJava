@@ -49,7 +49,7 @@ public class MealRestController {
 
     public void update(Meal meal, int userId) {
         log.info("update {} with id={}", meal, userId);
-        assureIdConsistent(meal, userId);
+        assureIdConsistent(meal, meal.getId());
         service.update(meal, authUserId);
     }
 
