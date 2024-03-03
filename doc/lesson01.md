@@ -74,7 +74,6 @@
 - [Сontinuum Java Ecosystem 2022 – Survey results](https://www.continuum.be/en/blog/the-java-ecosystem-2022-survey-results/)
 - [JRebel 2022 Java Developer Productivity Report](https://drive.google.com/file/d/1txLeRsNNR7EqYEeIvYmuyQi9hknBeR9G)
 
-## Внимание - обновил все патчи ниже 01.06 в 20:17. Если уже забрали, пожалуйста [скачайте заново](https://drive.google.com/drive/u/2/folders/0B9Ye2auQ_NsFfm5hSHEtbmxmN2kxb0NocVRwWl9KanowWXVCVXRZTlhaM09wQUswZkRidTA?resourcekey=0-H0PjelYVCYFR_1ANk-we5w)
 ### ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) 5. [Servlet API. Apache Tomcat. JSP](lesson01/tomcat_servlet_war.md)
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. [Логирование](https://www.youtube.com/watch?v=mo8z3zRVV1E)
