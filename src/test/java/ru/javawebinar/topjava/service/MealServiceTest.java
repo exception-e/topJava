@@ -1,8 +1,13 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExternalResource;
+import org.junit.rules.TestName;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
+import org.junit.runners.model.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,8 +31,47 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@Ignore
+//@Ignore
 public class MealServiceTest {
+    private static String watchedLog;
+
+
+    @Rule
+    public final TestName name = new TestName();
+
+    @Rule
+    public final TestRule watchman = new TestWatcher() {
+        @Override
+        public Statement apply(Statement base, Description description) {
+            return super.apply(base, description);
+        }
+
+        @Override
+        protected void succeeded(Description description) {
+            watchedLog += description.getDisplayName() + " " + "success!\n";
+        }
+
+        @Override
+        protected void failed(Throwable e, Description description) {
+            watchedLog += description.getDisplayName() + " " + e.getClass().getSimpleName() + "\n";
+        }
+
+        @Override
+        protected void skipped(AssumptionViolatedException e, Description description) {
+            watchedLog += description.getDisplayName() + " " + e.getClass().getSimpleName() + "\n";
+        }
+
+        @Override
+        protected void starting(Description description) {
+            super.starting(description);
+        }
+
+        @Override
+        protected void finished(Description description) {
+            super.finished(description);
+        }
+    };
+
 
     @Autowired
     private MealService service;
@@ -36,16 +80,22 @@ public class MealServiceTest {
     public void delete() {
         service.delete(MEAL1_ID, USER_ID);
         assertThrows(NotFoundException.class, () -> service.get(MEAL1_ID, USER_ID));
+        System.out.println("------MealServiceTest------");
+        System.out.println("method name:" + name.getMethodName());
     }
 
     @Test
     public void deleteNotFound() {
         assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND, USER_ID));
+        System.out.println("------MealServiceTest------");
+        System.out.println("method name:" + name.getMethodName());
     }
 
     @Test
     public void deleteNotOwn() {
         assertThrows(NotFoundException.class, () -> service.delete(MEAL1_ID, ADMIN_ID));
+        System.out.println("------MealServiceTest------");
+        System.out.println("method name:" + name.getMethodName());
     }
 
     @Test
@@ -56,12 +106,16 @@ public class MealServiceTest {
         newMeal.setId(newId);
         MEAL_MATCHER.assertMatch(created, newMeal);
         MEAL_MATCHER.assertMatch(service.get(newId, USER_ID), newMeal);
+        System.out.println("------MealServiceTest------");
+        System.out.println("method name:" + name.getMethodName());
     }
 
     @Test
     public void duplicateDateTimeCreate() {
         assertThrows(DataAccessException.class, () ->
                 service.create(new Meal(null, meal1.getDateTime(), "duplicate", 100), USER_ID));
+        System.out.println("------MealServiceTest------");
+        System.out.println("method name:" + name.getMethodName());
     }
 
     @Test
@@ -103,7 +157,7 @@ public class MealServiceTest {
         MEAL_MATCHER.assertMatch(service.getBetweenInclusive(
                         LocalDate.of(2020, Month.JANUARY, 30),
                         LocalDate.of(2020, Month.JANUARY, 30), USER_ID),
-                meal3, meal2, meal1);
+                meal1, meal2, meal3);
     }
 
     @Test

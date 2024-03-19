@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
 public interface MealRepository {
     // null if updated meal does not belong to userId
     Meal save(Meal meal, int userId);
+
 
     // false if meal does not belong to userId
     boolean delete(int id, int userId);
