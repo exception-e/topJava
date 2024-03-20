@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
         @NamedQuery(name = Meal.GET_BY_ID, query = "SELECT m FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
-        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id"),
         @NamedQuery(name = Meal.BETWEEN_HALF_OPEN, query = "SELECT m FROM Meal m WHERE m.dateTime>= ?1 AND m.dateTime < ?2" +
                 "AND m.user.id=:user_id")
 })
