@@ -413,7 +413,7 @@ Security-фильтров, и для базовой аутентификации
 
 - <a href="https://ru.wikipedia.org/wiki/HTTP_cookie">HTTP cookie</a></h3>
 - <a href="http://stackoverflow.com/questions/595872/under-what-conditions-is-a-jsessionid-created">Under what conditions is a JSESSIONID created?</a>
-- <a href="http://halyph.blogspot.ru/2014/08/how-to-disable-tomcat-session.html">Tomcat Session Serialization</a>
+- <a href="https://dev-answers.blogspot.com/2007/03/how-to-turn-off-tomcat-session.html">Turn off tomcat session serialization</a>
 
 ### Дополнительно: ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 12. [Новое в Spring 5. Миграция проекта](https://javaops.ru/view/resources/spring5)
 
