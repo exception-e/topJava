@@ -130,10 +130,23 @@
 > ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png)  Зачем надо начинать транзакцию, если речь идет только о чтении данных? Начало транзакции при выполнении операции чтения всего лишь добавит лишних накладных расходов 
 (см. [Стратегии работы с транзакциями, pаспространенные ошибки](http://web.archive.org/web/20170314073834/https://www.ibm.com/developerworks/ru/library/j-ts1/index.html))
 
+Вопрос сильно дискутируемый.
+1. Посмотрите в код Spring-Data-JPA и код [spring-petclinic](https://github.com/spring-projects/spring-petclinic/blob/main/src/main/java/org/springframework/samples/petclinic/vet/VetRepository.java) в открытием `@Transactional(readOnly = true)` 
+```
+@Repository
+@Transactional(readOnly = true)
+public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID> {
+```
 Вот ответ от Oliver Drotbohm, автора Spring-Data на предложение работать без транзакций для операций чтения (`propagation=Propagation.SUPPORTS`): [Improve performance with Propagation.SUPPORTS for readOnly operation](https://github.com/spring-projects/spring-data-jpa/issues/987). Коротко:
 - Статья устаревшая и неверно упрощает многие вещи. Есть множество вещей, которые влияют на производительность
 - Без транзакции не будет оптимизации по флагу `readOnly` при выполнении JDBC и в управлении ресурсами Spring's JPA (в том числе выключение `flush`)
 См. [Non-transactional data access and the auto-commit mode](https://developer.jboss.org/docs/DOC-13953)
+
+С другой стороны есть такие статьи про перформансе:
+- [Опять транзакции…](https://habr.com/ru/articles/803395/ )
+- [Discuss about the optimization](https://github.com/spring-projects/spring-data-jpa/issues/1544)
+
+Так вижу: есть офоциальный путь и попытки его поменять...
 
 Справочник:
    - <a href="https://www.youtube.com/watch?v=dFASbaIG-UU">Видео: Вячеслав Круглов — Как начинающему Java-разработчику подружиться со своей базой данных?</a>
